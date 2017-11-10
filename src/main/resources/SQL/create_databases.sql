@@ -10,16 +10,18 @@ CREATE TABLE `app_role` (
 
 -- Create syntax for TABLE 'app_user'
 CREATE TABLE `app_user` (
-  `id`         BIGINT(20)   NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(255) NOT NULL,
-  `last_name`  VARCHAR(255) NOT NULL,
-  `password`   VARCHAR(255) NOT NULL,
-  `username`   VARCHAR(255) NOT NULL,
-  `email`      VARCHAR(255) NOT NULL,
+  `id`                BIGINT(20)   NOT NULL AUTO_INCREMENT,
+  `first_name`        VARCHAR(255) NOT NULL,
+  `last_name`         VARCHAR(255) NOT NULL,
+  `password`          VARCHAR(255) NOT NULL,
+  `username`          VARCHAR(255) NOT NULL,
+  `email`             VARCHAR(255) NOT NULL DEFAULT '',
+  `active`            TINYINT(1)   NOT NULL DEFAULT '0',
+  `confirmation_code` VARCHAR(255)          DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 14
+  AUTO_INCREMENT = 30
   DEFAULT CHARSET = utf8;
 
 -- Create syntax for TABLE 'user_role'
