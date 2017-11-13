@@ -158,7 +158,9 @@ public class UserResource {
     private User fromDTO(final UserDTO userDTO) {
         final User user = userService.findByUsername(userDTO.getUsername());
         if (user != null) {
+            final Long id = user.getId();
             modelMapper.map(userDTO, user);
+            user.setId(id);
             return user;
         }
         return modelMapper.map(userDTO, User.class);
