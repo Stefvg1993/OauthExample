@@ -62,12 +62,15 @@ public class UserResource {
             throw new IllegalArgumentException("user cannot be null");
         }
         final User user = fromDTO(userDTO);
+        if (user.getId() != null) {
+            throw new IllegalArgumentException("User already exists");
+        }
+
         user.setRoles(Collections.singletonList(roleService.findByRoleName(STANDARD_ROLE_NAME)));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(false);
         user.setConfirmationCode(UUID.randomUUID().toString());
         userService.saveUser(user);
-        System.out.println(user.getConfirmationCode());
         sendConfirmationEmail(userDTO.getEmail(), user.getUsername(), user.getConfirmationCode());
         return ResponseEntity.ok().build();
     }
