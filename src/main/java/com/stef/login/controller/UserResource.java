@@ -89,8 +89,8 @@ public class UserResource {
         user.setRoles(authenticatedUser.getRoles());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmationCode(null);
-        userService.saveUser(user);
-        return ResponseEntity.ok().build();
+        final User savedUser = userService.saveUser(user);
+        return ResponseEntity.ok(toDTO(savedUser));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
