@@ -17,7 +17,6 @@ public class UserDTO {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(min = 6)
-    @NotEmpty
     private String password;
 
     @NotEmpty
