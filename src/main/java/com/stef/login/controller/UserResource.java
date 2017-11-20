@@ -87,7 +87,11 @@ public class UserResource {
             return ResponseEntity.badRequest().body("You can only update a user with the same id as yourself");
         }
         user.setRoles(authenticatedUser.getRoles());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
+            user.setPassword(authenticatedUser.getPassword());
+        }
         user.setConfirmationCode(null);
         final User savedUser = userService.saveUser(user);
         return ResponseEntity.ok(toDTO(savedUser));
