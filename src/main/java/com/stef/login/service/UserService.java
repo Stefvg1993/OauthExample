@@ -37,8 +37,8 @@ public class UserService {
      *
      * @param user the user to add
      */
-    public void saveUser(final User user) {
-        userRepository.save(user);
+    public User saveUser(final User user) {
+        return userRepository.save(user);
     }
 
     /**
