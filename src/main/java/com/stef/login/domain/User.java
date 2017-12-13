@@ -135,7 +135,7 @@ public class User {
 
     public boolean isAdministrator() {
         final List<Role> roles = getRoles();
-        return !CollectionUtils.isEmpty(roles) && roles.stream().anyMatch(p -> p.getRoleName().equals(ADMIN_USER));
+        return !CollectionUtils.isEmpty(roles) && roles.stream().anyMatch(p -> p != null && p.getRoleName() != null && p.getRoleName().equals(ADMIN_USER));
     }
 }
 

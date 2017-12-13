@@ -29,18 +29,22 @@ public class UserResource {
     private static final String STANDARD_ROLE_NAME = "STANDARD_USER";
     private static final String BASE_URL = "http://localhost:4200/";
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleService roleService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
-    private JavaMailSender sender;
+    private final ModelMapper modelMapper;
+    private final JavaMailSender sender;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    public UserResource(final RoleService roleService, final UserService userService, final ModelMapper modelMapper, final JavaMailSender sender) {
+        this.roleService = roleService;
+        this.userService = userService;
+        this.modelMapper = modelMapper;
+        this.sender = sender;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getCurrentUser() {
@@ -172,7 +176,7 @@ public class UserResource {
     }
 
     private boolean isSameUserOrAdministrator(@RequestBody final User user, final User authenticatedUser) {
-        return (authenticatedUser == null || !authenticatedUser.getId().equals(user.getId())) && !authenticatedUser.isAdministrator();
+        return (authenticatedUser == null || !authenticatedUser.getId().equals(user.getId())) && (authenticatedUser != null && !authenticatedUser.isAdministrator());
     }
 
     private User getAuthenticatedUserFromDB() {

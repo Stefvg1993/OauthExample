@@ -9,8 +9,12 @@ import java.util.List;
 
 @Service
 public class UserService {
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserService(final UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Find the user that belongs to the username

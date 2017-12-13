@@ -13,8 +13,12 @@ import javax.mail.internet.MimeMessage;
 @RequestMapping("/unsecured")
 public class UnsecuredResource {
 
+    private final JavaMailSender sender;
+
     @Autowired
-    private JavaMailSender sender;
+    public UnsecuredResource(final JavaMailSender sender) {
+        this.sender = sender;
+    }
 
     @RequestMapping("/mail")
     public ResponseEntity sendMail() {
