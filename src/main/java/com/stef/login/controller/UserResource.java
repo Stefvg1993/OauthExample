@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/secured/user")
 public class UserResource {
     private static final String STANDARD_ROLE_NAME = "STANDARD_USER";
+    private static final String BASE_URL = "http://localhost:4200/";
 
     @Autowired
     private RoleService roleService;
@@ -185,7 +186,7 @@ public class UserResource {
         final MimeMessage message = sender.createMimeMessage();
         final MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo(email);
-        helper.setText("Confirmation link: \nURL: http://localhost:4200/confirmUser?username=" + username + "&code=" + confirmationCode);
+        helper.setText("Confirmation link: \nURL: " + BASE_URL + "confirmUser?username=" + username + "&code=" + confirmationCode);
         helper.setSubject("Confirm user");
         sender.send(message);
     }
@@ -194,7 +195,7 @@ public class UserResource {
         final MimeMessage message = sender.createMimeMessage();
         final MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo(email);
-        helper.setText("Reset password link: \nURL: http://localhost:4200/resetPassword?username=" + username + "&code=" + confirmationCode);
+        helper.setText("Reset password link: \nURL: " + BASE_URL + "resetPassword?username=" + username + "&code=" + confirmationCode);
         helper.setSubject("Reset password");
         sender.send(message);
     }
