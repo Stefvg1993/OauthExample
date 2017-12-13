@@ -1,5 +1,6 @@
 # OauthExample
 A Spring boot example for Oauth authentication. Proper user management through an sql data storage. Check also the Angular 4 example for a proper login website with user management: https://github.com/Stefvg1993/OauthAngularExample.
+
 Every call that goes to 'url'/secured/... has to be authenticated. Every other call is unsecured.
 
 
